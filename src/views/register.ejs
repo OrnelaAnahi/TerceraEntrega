@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Registro</h1>
+    <form action="/register" method="post">
+      <label for="">Ingrese su nombre</label>
+      <input type="text" name="name" id="name" placeholder="Nombre" />
+      <label for="">Ingrese su apellido</label>
+      <input type="text" name="apellido" id="apellido" placeholder="Apellido" />
+      <label for="">Ingrese su direccion</label>
+      <input
+        type="text"
+        name="direccion"
+        id="direccion"
+        placeholder="Direccion"
+      />
+      <label for="">Ingrese su edad</label>
+      <input type="number" name="edad" id="edad" min="0" />
+      <label for="">Ingrese su telefono</label>
+
+      <input
+        type="number"
+        name="telefono"
+        id="telefono"
+        placeholder="Telefono"
+      />
+      <label for="">Ingrese un mail</label>
+      <input type="text" name="email" placeholder="Email" />
+      <label for="">Ingrese una contraseña</label>
+      <input type="password" name="password" placeholder="Contraseña" />
+      <input type="submit" value="Registrar" />
+    </form>
+    <h2>¿Ya estas registrado?</h2>
+    <a href="/login">Iniciar sesion</a>
+  </body>
+</html>
