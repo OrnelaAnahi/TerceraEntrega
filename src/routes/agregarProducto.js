@@ -30,23 +30,35 @@ router.post('/', async (req, res) => {
 router.post('/addCart', async (req, res) => {
   const { id } = req.body
   const producto = await Product.findById(id)
-  const newCarrito = new Carrito({
-    producto: producto.producto,
-    precio: producto.precio,
-    imagen: producto.imagen
-  })
-  await newCarrito.save()
-  res.redirect('/productos/carrito')
+  console.log(req.session.passport.user)
+  if (Carrito.findOne({ user: req.session.passport.user })) {
+    const carrito = await Carrito.findOne({ user: req.session.passport.user })
+    carrito.productos.push(producto)
+    await carrito.save()
+    res.redirect('/productos/carrito')
+  } else {
+    const newCarrito = new Carrito({
+      user: req.session.passport.user,
+      productos: [{
+        producto: producto.producto,
+        precio: producto.precio,
+        imagen: producto.imagen
+      }]
+    })
+    await newCarrito.save()
+    res.redirect('/productos/carrito')
+  }
 })
 
 router.get('/carrito', async (req, res) => {
-  let productosCarrito = await Carrito.find()
+  let CarritoDB = await Carrito.find({ user: req.session.passport.user })
+  productosCarrito = await CarritoDB[0].productos
   res.render('carrito', { productosCarrito })
-  console.log(productosCarrito)
 })
 
 router.post('/comprar', async (req, res) => {
-  let productosCarrito = await Carrito.find()
+  let CarritoDB = await Carrito.find({ user: req.session.passport.user })
+  productosCarrito = await CarritoDB[0].productos
   res.render('compra')
   User.findById(req.session.passport.user, (err, user) => {
     if (err) {

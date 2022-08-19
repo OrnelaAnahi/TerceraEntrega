@@ -1,15 +1,14 @@
 const { Schema, model } = require('mongoose')
 
 const carritoSchema = new Schema({
-  producto: {
+  user: {
     type: String,
     required: true
   },
-  precio: {
-    type: Number,
-    default: 0
-  },
-  imagen: String,
+  productos: {
+    type: Array,
+    required: true
+  }
 })
 
 module.exports = model('carrito', carritoSchema)
