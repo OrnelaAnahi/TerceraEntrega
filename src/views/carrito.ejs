@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Mi carrito</h1>
+    <table id="tabla" cellspacing="0" cellpadding="50">
+      <thead>
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Foto</th>
+        </tr>
+      </thead>
+      <% if(productosCarrito.length===0) { %>
+        <tbody id="cajaTbody">
+          <tr>
+            <td id="no hay datos" colspan="3">No hay datos</td>
+
+          </tr>
+        </tbody>
+        <% } else { %>
+          <% for(let i=0; i<productosCarrito.length; i++) { %>
+            <tr>
+              <td align="center">
+                <%=productosCarrito[i].producto %>
+              </td>
+              <td align="center">
+                <%=productosCarrito[i].precio %>
+              </td>
+              <td align="center">
+                <img src="<%=productosCarrito[i].imagen%>" height="150px" alt="5">
+              </td>
+            </tr>
+            <% }}%>
+    </table>
+    <form action="/productos/comprar" method="post">
+      <input type="submit" value="Comprar">
+    </form>
+  </body>
+</html>
